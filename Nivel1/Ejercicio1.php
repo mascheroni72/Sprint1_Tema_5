@@ -6,29 +6,30 @@
     <title>Document</title>
 </head>
 <body>
-    <?php
-    class Animal {
-        private string $pet;
-        
-        public function __construct(string $pet) {
-            $this->pet = $pet;
-        }
-        public function makeSound() {
-            if ($this->pet == "cat") {
-                echo "miau, miau";
-            } else if ($this->pet == "dog") {
-                echo "guau, guau";
-            }
-        }
+<?php
+abstract class Animal {
+    protected string $pet;
+    
+    public function __construct(string $pet) {
+        $this->pet = $pet;
     }
-    $cat = new Animal("cat", "miau"); 
-    $dog = new Animal("dog", "guau"); 
+    abstract public function makeSound(): string;
+}
+class Cat extends Animal {
+    public function makeSound(): string {
+        return "miau, miau";
+    }
+}
+class Dog extends Animal {
+    public function makeSound(): string {
+        return "guau, guau";
+    }
+}
+$cat = new Cat("cat");
+$dog = new Dog("dog");
 
-    echo "I'm Tomas the cat and I say: ";
-    $cat->makeSound ();
-    echo "<br>";
-    echo "I'm a dog, Mendieta, and I also speak: ";
-    $dog->makeSound ();
-    ?>
+echo "I'm Tomas the cat and I say: " . $cat->makeSound() . "<br>";
+echo "I'm a dog, Mendieta, and I also speak: " . $dog->makeSound();
+?>
 </body>
 </html>
